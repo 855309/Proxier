@@ -1,0 +1,12 @@
+C:\Users\fikret\source\repos\Proxier\Proxier\bin\Debug\Proxier.exe.config
+C:\Users\fikret\source\repos\Proxier\Proxier\bin\Debug\Proxier.exe
+C:\Users\fikret\source\repos\Proxier\Proxier\bin\Debug\Proxier.pdb
+C:\Users\fikret\source\repos\Proxier\Proxier\obj\Debug\Proxier.csprojAssemblyReference.cache
+C:\Users\fikret\source\repos\Proxier\Proxier\obj\Debug\Proxier.Properties.Resources.resources
+C:\Users\fikret\source\repos\Proxier\Proxier\obj\Debug\Proxier.csproj.GenerateResource.cache
+C:\Users\fikret\source\repos\Proxier\Proxier\obj\Debug\Proxier.csproj.CoreCompileInputs.cache
+C:\Users\fikret\source\repos\Proxier\Proxier\obj\Debug\Proxier.exe
+C:\Users\fikret\source\repos\Proxier\Proxier\obj\Debug\Proxier.pdb
+C:\Users\fikret\source\repos\Proxier\Proxier\obj\Debug\Proxier.AnaForm.resources
+C:\Users\fikret\source\repos\Proxier\Proxier\obj\Debug\Proxier.Formlar.ProxySecim.resources
+C:\Users\fikret\source\repos\Proxier\Proxier\obj\Debug\Proxier.Formlar.Hakkinda.resources
