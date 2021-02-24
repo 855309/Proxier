@@ -40,6 +40,7 @@ namespace Proxier.Formlar
             // 
             // secmeButton
             // 
+            this.secmeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.secmeButton.Location = new System.Drawing.Point(277, 48);
             this.secmeButton.Name = "secmeButton";
             this.secmeButton.Size = new System.Drawing.Size(27, 20);
@@ -50,6 +51,8 @@ namespace Proxier.Formlar
             // 
             // yolTextBox
             // 
+            this.yolTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.yolTextBox.Location = new System.Drawing.Point(12, 48);
             this.yolTextBox.Name = "yolTextBox";
             this.yolTextBox.ReadOnly = true;
@@ -58,17 +61,21 @@ namespace Proxier.Formlar
             // 
             // proxyBilgi
             // 
-            this.proxyBilgi.AutoSize = true;
+            this.proxyBilgi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.proxyBilgi.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.proxyBilgi.Location = new System.Drawing.Point(9, 9);
             this.proxyBilgi.Name = "proxyBilgi";
             this.proxyBilgi.Size = new System.Drawing.Size(295, 30);
             this.proxyBilgi.TabIndex = 2;
-            this.proxyBilgi.Text = "Proxyleri aşağıya manuel olarak IP:PORT olarak girebilir\r\nya da proxyleri içeren " +
-    ".txt dosyasını seçebilirsiniz.";
+            this.proxyBilgi.Text = "Proxyleri aşağıya manuel olarak IP:PORT olarak girebilir ya da proxyleri içeren ." +
+    "txt dosyasını seçebilirsiniz.";
             // 
             // proxyBox
             // 
+            this.proxyBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.proxyBox.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.proxyBox.Location = new System.Drawing.Point(12, 94);
             this.proxyBox.Multiline = true;
@@ -80,6 +87,8 @@ namespace Proxier.Formlar
             // 
             // tamamButton
             // 
+            this.tamamButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tamamButton.Enabled = false;
             this.tamamButton.Location = new System.Drawing.Point(12, 333);
             this.tamamButton.Name = "tamamButton";

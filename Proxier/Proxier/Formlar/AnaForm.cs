@@ -60,6 +60,7 @@ namespace Proxier
 
         private void başlatToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            durdurToolStripMenuItem.Enabled = true;
             denemeBaslat();
         }
 
@@ -67,15 +68,28 @@ namespace Proxier
         {
             foreach (string proxystring in proxyler)
             {
-                await Dene(proxystring);
+                if (durdu)
+                {
+                    durdurToolStripMenuItem.Enabled = false;
+                    break;
+                }
+
+                basariliLabel.Text = basariliProxyler.Count().ToString();
+                basarisizLabel.Text = basarisizProxyler.Count().ToString();
+
+                //await Dene(proxystring);
+                await Task.Run(() => Dene(proxystring));
             }
 
-            durumYaz("Deneme bitti. Toplam " + basariliProxyler.Count() + " Adet çalışan proxy bulundu.");
+            durumYaz("Deneme bitti.");
             MessageBox.Show("Deneme bitti.\r\nToplam " + basariliProxyler.Count() + " Adet çalışan proxy,\r\n" + basarisizProxyler.Count() + " Adet çalışmayan proxy bulundu.", "Proxier", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             çalışanProxyleriKaydetToolStripMenuItem.Enabled = true;
             bütünSonuçlarıKaydetToolStripMenuItem.Enabled = true;
         }
+
+        string testServer = "https://www.cloudflare.com/cdn-cgi/trace";
+
 
         public async Task<bool> Dene(string proxystring)
         {
@@ -101,18 +115,54 @@ namespace Proxier
 
             try
             {
-                var cevap = await client.GetAsync("https://www.google.com/");
+                DateTime onceZaman = DateTime.UtcNow;
+                var cevap = await client.GetAsync(testServer);
+                DateTime sonraZaman = DateTime.UtcNow;
+
+                TimeSpan pingZaman = sonraZaman - onceZaman;
+
+                double ping = pingZaman.TotalMilliseconds;
 
                 if (cevap.StatusCode == HttpStatusCode.OK)
                 {
                     durumYaz(proxystring + " başarılı.");
                     item = new ListViewItem(proxystring, "basarili");
+                    
+
+                    if (ping < 70)
+                    {
+                        item.SubItems.Add("Çok İyi", Color.Green, BackColor, Font);
+                        item.SubItems.Add(Math.Floor(ping).ToString() + " ms", Color.Green, BackColor, Font);
+                    }
+                    else if (ping < 150)
+                    {
+                        item.SubItems.Add("Normal", Color.DarkGreen, BackColor, Font);
+                        item.SubItems.Add(Math.Floor(ping).ToString() + " ms", Color.DarkGreen, BackColor, Font);
+                    }
+                    else if(ping < 500)
+                    {
+                        item.SubItems.Add("Orta", Color.Gold, BackColor, Font);
+                        item.SubItems.Add(Math.Floor(ping).ToString() + " ms", Color.Gold, BackColor, Font);
+                    }
+                    else if (ping < 1000)
+                    {
+                        item.SubItems.Add("Kötü", Color.Red, BackColor, Font);
+                        item.SubItems.Add(Math.Floor(ping).ToString() + " ms", Color.Red, BackColor, Font);
+                    }
+                    else if (ping < 2000)
+                    {
+                        item.SubItems.Add("Çok Kötü", Color.DarkRed, BackColor, Font);
+                        item.SubItems.Add(Math.Floor(ping).ToString() + " ms", Color.DarkRed, BackColor, Font);
+                    }
+
                     basariliProxyler.Add(proxystring);
                 }
                 else
                 {
                     durumYaz(proxystring + " başarısız.");
                     item = new ListViewItem(proxystring, "basarisiz");
+                    item.SubItems.Add("-");
+                    item.SubItems.Add("-");
                     basarisizProxyler.Add(proxystring);
                 }
             }
@@ -120,6 +170,8 @@ namespace Proxier
             {
                 durumYaz(proxystring + " başarısız.");
                 item = new ListViewItem(proxystring, "basarisiz");
+                item.SubItems.Add("-");
+                item.SubItems.Add("-");
                 basarisizProxyler.Add(proxystring);
             }
 
@@ -128,6 +180,8 @@ namespace Proxier
             return await Task.FromResult(true);
         }
 
+        public bool durdu = false;
+        
         private void yardımToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Process.Start("https://github.com/fikret0/Proxier");
@@ -185,15 +239,20 @@ namespace Proxier
 
                 File.WriteAllLines(dialog.FileName, sonuc);
 
-                MessageBox.Show(proxyler.Count() + " Adet sonuç kaydedildi.", "Proxier", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show((int)(basariliProxyler.Count() + basarisizProxyler.Count()) + " Adet sonuç kaydedildi.", "Proxier", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                durumYaz(proxyler.Count() + " Adet sonuç kaydedildi.");
+                durumYaz((int)(basariliProxyler.Count() + basarisizProxyler.Count()) + " Adet sonuç kaydedildi.");
             }
         }
 
         public void durumYaz(string durum)
         {
             durumLabel.Text = durum;
+        }
+
+        private void durdurToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            durdu = true;
         }
     }
 }

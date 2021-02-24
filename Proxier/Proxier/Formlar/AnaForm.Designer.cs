@@ -46,10 +46,18 @@ namespace Proxier
             this.yardımToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.hakkındaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hakkındaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.proxyListView = new System.Windows.Forms.ListView();
-            this.proxyColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.durumLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.durdurToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusBosluk = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.basariliLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.basarisizLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.proxyListView = new System.Windows.Forms.ListView();
+            this.proxyColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.pingColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.baglantiHiziColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.MenuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -63,7 +71,7 @@ namespace Proxier
             this.yardımToolStripMenuItem});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
-            this.MenuStrip.Size = new System.Drawing.Size(348, 24);
+            this.MenuStrip.Size = new System.Drawing.Size(383, 24);
             this.MenuStrip.TabIndex = 0;
             this.MenuStrip.Text = "Menü";
             // 
@@ -71,6 +79,7 @@ namespace Proxier
             // 
             this.dosyaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.başlatToolStripMenuItem,
+            this.durdurToolStripMenuItem,
             this.toolStripSeparator1,
             this.çalışanProxyleriKaydetToolStripMenuItem,
             this.bütünSonuçlarıKaydetToolStripMenuItem,
@@ -134,19 +143,20 @@ namespace Proxier
             // proxyYükleToolStripMenuItem
             // 
             this.proxyYükleToolStripMenuItem.Name = "proxyYükleToolStripMenuItem";
-            this.proxyYükleToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.proxyYükleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.proxyYükleToolStripMenuItem.Text = "Proxy Yükle";
             this.proxyYükleToolStripMenuItem.Click += new System.EventHandler(this.proxyYükleToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(162, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
             // 
             // sonuçlarıTemizleToolStripMenuItem
             // 
+            this.sonuçlarıTemizleToolStripMenuItem.Enabled = false;
             this.sonuçlarıTemizleToolStripMenuItem.Name = "sonuçlarıTemizleToolStripMenuItem";
-            this.sonuçlarıTemizleToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.sonuçlarıTemizleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sonuçlarıTemizleToolStripMenuItem.Text = "Sonuçları Temizle";
             this.sonuçlarıTemizleToolStripMenuItem.Click += new System.EventHandler(this.sonuçlarıTemizleToolStripMenuItem_Click);
             // 
@@ -161,7 +171,7 @@ namespace Proxier
             // yardımToolStripMenuItem1
             // 
             this.yardımToolStripMenuItem1.Name = "yardımToolStripMenuItem1";
-            this.yardımToolStripMenuItem1.Size = new System.Drawing.Size(111, 22);
+            this.yardımToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.yardımToolStripMenuItem1.Text = "Yardım";
             this.yardımToolStripMenuItem1.Click += new System.EventHandler(this.yardımToolStripMenuItem1_Click);
             // 
@@ -180,30 +190,18 @@ namespace Proxier
             this.hakkındaToolStripMenuItem1.Text = "Hakkında";
             this.hakkındaToolStripMenuItem1.Click += new System.EventHandler(this.hakkındaToolStripMenuItem1_Click);
             // 
-            // proxyListView
-            // 
-            this.proxyListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.proxyColumn});
-            this.proxyListView.HideSelection = false;
-            this.proxyListView.Location = new System.Drawing.Point(0, 24);
-            this.proxyListView.Name = "proxyListView";
-            this.proxyListView.Size = new System.Drawing.Size(348, 444);
-            this.proxyListView.TabIndex = 2;
-            this.proxyListView.UseCompatibleStateImageBehavior = false;
-            this.proxyListView.View = System.Windows.Forms.View.Details;
-            // 
-            // proxyColumn
-            // 
-            this.proxyColumn.Text = "Proxy";
-            this.proxyColumn.Width = 339;
-            // 
             // StatusStrip
             // 
             this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.durumLabel});
-            this.StatusStrip.Location = new System.Drawing.Point(0, 468);
+            this.durumLabel,
+            this.statusBosluk,
+            this.toolStripStatusLabel1,
+            this.basariliLabel,
+            this.toolStripStatusLabel2,
+            this.basarisizLabel});
+            this.StatusStrip.Location = new System.Drawing.Point(0, 459);
             this.StatusStrip.Name = "StatusStrip";
-            this.StatusStrip.Size = new System.Drawing.Size(348, 22);
+            this.StatusStrip.Size = new System.Drawing.Size(383, 22);
             this.StatusStrip.TabIndex = 3;
             this.StatusStrip.Text = "statusStrip1";
             // 
@@ -213,13 +211,87 @@ namespace Proxier
             this.durumLabel.Size = new System.Drawing.Size(37, 17);
             this.durumLabel.Text = "Hazır.";
             // 
+            // durdurToolStripMenuItem
+            // 
+            this.durdurToolStripMenuItem.Enabled = false;
+            this.durdurToolStripMenuItem.Name = "durdurToolStripMenuItem";
+            this.durdurToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.durdurToolStripMenuItem.Text = "Durdur";
+            this.durdurToolStripMenuItem.Click += new System.EventHandler(this.durdurToolStripMenuItem_Click);
+            // 
+            // statusBosluk
+            // 
+            this.statusBosluk.Name = "statusBosluk";
+            this.statusBosluk.Size = new System.Drawing.Size(204, 17);
+            this.statusBosluk.Spring = true;
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(47, 17);
+            this.toolStripStatusLabel1.Text = "Başarılı:";
+            // 
+            // basariliLabel
+            // 
+            this.basariliLabel.ForeColor = System.Drawing.Color.LimeGreen;
+            this.basariliLabel.Name = "basariliLabel";
+            this.basariliLabel.Size = new System.Drawing.Size(13, 17);
+            this.basariliLabel.Text = "0";
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(54, 17);
+            this.toolStripStatusLabel2.Text = "Başarısız:";
+            // 
+            // basarisizLabel
+            // 
+            this.basarisizLabel.ForeColor = System.Drawing.Color.Red;
+            this.basarisizLabel.Name = "basarisizLabel";
+            this.basarisizLabel.Size = new System.Drawing.Size(13, 17);
+            this.basarisizLabel.Text = "0";
+            // 
+            // proxyListView
+            // 
+            this.proxyListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.proxyListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.proxyColumn,
+            this.pingColumn,
+            this.baglantiHiziColumn});
+            this.proxyListView.HideSelection = false;
+            this.proxyListView.Location = new System.Drawing.Point(0, 23);
+            this.proxyListView.Name = "proxyListView";
+            this.proxyListView.Size = new System.Drawing.Size(383, 435);
+            this.proxyListView.TabIndex = 4;
+            this.proxyListView.UseCompatibleStateImageBehavior = false;
+            this.proxyListView.View = System.Windows.Forms.View.Details;
+            // 
+            // proxyColumn
+            // 
+            this.proxyColumn.Text = "Proxy";
+            this.proxyColumn.Width = 145;
+            // 
+            // pingColumn
+            // 
+            this.pingColumn.Text = "Ping";
+            this.pingColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.pingColumn.Width = 109;
+            // 
+            // baglantiHiziColumn
+            // 
+            this.baglantiHiziColumn.Text = "Bağlantı Hızı";
+            this.baglantiHiziColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.baglantiHiziColumn.Width = 104;
+            // 
             // AnaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(348, 490);
-            this.Controls.Add(this.StatusStrip);
+            this.ClientSize = new System.Drawing.Size(383, 481);
             this.Controls.Add(this.proxyListView);
+            this.Controls.Add(this.StatusStrip);
             this.Controls.Add(this.MenuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.MenuStrip;
@@ -241,8 +313,6 @@ namespace Proxier
         private System.Windows.Forms.ToolStripMenuItem proxylerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem yardımToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hakkındaToolStripMenuItem;
-        private System.Windows.Forms.ListView proxyListView;
-        private System.Windows.Forms.ColumnHeader proxyColumn;
         private System.Windows.Forms.ToolStripMenuItem başlatToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem çalışanProxyleriKaydetToolStripMenuItem;
@@ -256,6 +326,16 @@ namespace Proxier
         private System.Windows.Forms.ToolStripMenuItem hakkındaToolStripMenuItem1;
         private System.Windows.Forms.StatusStrip StatusStrip;
         private System.Windows.Forms.ToolStripStatusLabel durumLabel;
+        private System.Windows.Forms.ToolStripMenuItem durdurToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel statusBosluk;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel basariliLabel;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel basarisizLabel;
+        private System.Windows.Forms.ListView proxyListView;
+        private System.Windows.Forms.ColumnHeader proxyColumn;
+        private System.Windows.Forms.ColumnHeader pingColumn;
+        private System.Windows.Forms.ColumnHeader baglantiHiziColumn;
     }
 }
 
