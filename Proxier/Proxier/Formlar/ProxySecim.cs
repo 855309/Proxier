@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net;
 using System.Windows.Forms;
 
 namespace Proxier.Formlar
@@ -19,6 +14,7 @@ namespace Proxier.Formlar
             InitializeComponent();
             Control.CheckForIllegalCrossThreadCalls = false;
         }
+    
 
         private void ProxySecim_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -78,6 +74,34 @@ namespace Proxier.Formlar
             {
                 tamamButton.Enabled = true;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(TbUrl.Text))
+            {
+                MessageBox.Show("Lütfen önce URL giriniz");
+                return;
+            }
+            var webRequest = WebRequest.Create(TbUrl.Text);
+
+            using (var response = webRequest.GetResponse())
+            using (var content = response.GetResponseStream())
+            using (var reader = new StreamReader(content))
+            {
+                var strContent = reader.ReadToEnd();
+                var lst = strContent.Split('\n');
+                foreach (string parca in lst)
+                {
+                    if (parca.Trim() != "")
+                    {
+                        proxyler.Add(parca.Trim());
+                    }
+                }
+
+                this.DialogResult = DialogResult.OK;
+            }
+
         }
     }
 }
